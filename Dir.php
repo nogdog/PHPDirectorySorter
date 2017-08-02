@@ -19,6 +19,13 @@ class Dir
         foreach($this->data as $ix => $data) {
             $this->data[$ix]['size'] = filesize($data['name']);
             $this->data[$ix]['timestamp'] = date('Y-m-d H:i:s', filemtime($data['name']));
+            $this->data[$ix]['type'] = 'file';
+            if(is_dir($path.DIRECTORY_SEPARATOR.$data['name'])) {
+                $this->data[$ix]['type'] = 'directory';
+            }
+            elseif(strpos($data['name'], '.') === 0) {
+                $this->data[$ix]['type'] = 'hidden';
+            }
         }
     }
 
