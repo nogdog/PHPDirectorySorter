@@ -17,6 +17,9 @@ class Dir
      */
     public function __construct($path)
     {
+        if(!@is_dir($path)) {
+            throw new Exception("Could not find '$path', or it is not a directory.");
+        }
         $handle = opendir($path);
         while($data = readdir($handle)) {
             $this->data[]['name'] = $data;
