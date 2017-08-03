@@ -2,7 +2,6 @@
 
 /**
  * Directory sorter
- * Warning: no error-checking at this point!
  */
 class Dir
 {
@@ -41,33 +40,36 @@ class Dir
      * Sort by file name
      *
      * @param boolean $ascending (default: true)
-     * @return void
+     * @return Dir
      */
     public function sortByName($ascending=true)
     {
         $this->sortBy('name', $ascending);
+        return $this;
     }
 
     /**
      * Sort by file mod timestamp
      *
      * @param boolean $ascending (default: true)
-     * @return void
+     * @return Dir
      */
     public function sortByTime($ascending=true)
     {
         $this->sortBy('timestamp', $ascending);
+        return $this;
     }
 
     /**
      * Sort by file size
      *
      * @param boolean $ascending (default: true)
-     * @return void
+     * @return Dir
      */
     public function sortBySize($ascending=true)
     {
         $this->sortBy('size', $ascending);
+        return $this;
     }
 
     private function sortBy($field, $ascending=true)
