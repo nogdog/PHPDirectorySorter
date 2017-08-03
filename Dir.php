@@ -10,6 +10,11 @@ class Dir
     private $sortField = 'name';
     private $direction = 1;
 
+    /**
+     * Constructor
+     *
+     * @param string $path Directory to list/sort
+     */
     public function __construct($path)
     {
         $handle = opendir($path);
@@ -29,25 +34,43 @@ class Dir
         }
     }
 
-    public function sortByName($asc = true)
+    /**
+     * Sort by file name
+     *
+     * @param boolean $ascending (default: true)
+     * @return void
+     */
+    public function sortByName($ascending=true)
     {
-        $this->sortBy('name', $asc);
+        $this->sortBy('name', $ascending);
     }
 
-    public function sortByTime($asc=true)
+    /**
+     * Sort by file mod timestamp
+     *
+     * @param boolean $ascending (default: true)
+     * @return void
+     */
+    public function sortByTime($ascending=true)
     {
-        $this->sortBy('timestamp', $asc);
+        $this->sortBy('timestamp', $ascending);
     }
 
-    public function sortBySize($asc=true)
+    /**
+     * Sort by file size
+     *
+     * @param boolean $ascending (default: true)
+     * @return void
+     */
+    public function sortBySize($ascending=true)
     {
-        $this->sortBy('size', $asc);
+        $this->sortBy('size', $ascending);
     }
 
-    private function sortBy($field, $asc=true)
+    private function sortBy($field, $ascending=true)
     {
         $this->sortField = $field;
-        $this->direction = $asc ? 1 : -1;
+        $this->direction = $ascending ? 1 : -1;
         usort($this->data, array($this, 'sort'));
     }
 
